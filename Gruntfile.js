@@ -15,7 +15,7 @@ module.exports = function(grunt) {
             "target": "target",
 
             // location to place (compiled) javascript files
-            "target_js": "target/classes/static/js",
+            "target_js": "target/js",
 
             // location to place (compiles) javascript test files
             // "target_test_js": "target/js-test",
@@ -29,14 +29,16 @@ module.exports = function(grunt) {
             // Compiles the code into a single file. Also generates a typescript declaration file
             compile: {
                 src: ['<%= dir.source_ts %>/**/*.ts'],
-                dest: '<%= dir.target_js %>/<%= project.name %>.js',
+                dest: '<%= dir.source_ts %>',
+                // dest: '<%= dir.target_js %>/<%= project.name %>.js',
                 options: {
                     base_path: '<%= dir.source_ts %>',
-                    target: 'es5',
+                    target: 'es6',
                     declaration: true,
                     comments: true
                 }
-            },
+            }
+
             // Compiles the tests.
             // compile_test: {
             //     src: ['<%= dir.source_test_ts %>/**/*.ts'],
@@ -47,6 +49,17 @@ module.exports = function(grunt) {
             //     }
             // }
         },
+        clean:{
+            clean_all:{
+                src:['<%= dir.source_ts %>/*.d.ts','<%= dir.source_ts %>/*.js' ]
+            }
+        },
+        uglify: {
+            my_target: {
+                dest: '<%= dir.target_js %>/minified.js',
+                src: ['<%= dir.target_js %>/<%= project.name %>.js']
+            }
+        }
         // ------- Unit tests with code coverage
         //  See https://github.com/gruntjs/grunt-contrib-jasmine
         // jasmine: {
@@ -62,6 +75,10 @@ module.exports = function(grunt) {
     });
     // ----- Setup tasks
     grunt.loadNpmTasks('grunt-typescript');
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.registerTask('default', ['typescript:compile','typescript:compile_test','jasmine']);
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    // grunt.loadNpmTasks('grunt-contrib-jasmine');
+    // grunt.registerTask('default', ['typescript:compile','typescript:compile_test','jasmine']);
+    grunt.registerTask('default', ['clean:clean_all', 'typescript:compile' ]);
+    // grunt.registerTask('compile', ['clean:clean_all', 'typescript:compile' ]);
 };

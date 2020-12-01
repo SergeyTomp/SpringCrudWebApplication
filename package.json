@@ -1,8 +1,13 @@
 {
-  "name": "spring-crud-web-application",
-  "version": "0.0.1-SNAPSHOT",
+  "name": "spring_crud",
+  "version": "0.0.1",
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-typescript": "~0.2.4"
+    "grunt": "latest",
+    "grunt-typescript": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-cssmin": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-clean": "latest"
   }
 }

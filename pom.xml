@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.java-master</groupId>
 	<artifactId>demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>spring_crud</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -55,7 +55,67 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!--invoke Grunt from within Maven-->
+			<plugin>
+				<groupId>pl.allegro</groupId>
+				<artifactId>grunt-maven-plugin</artifactId>
+				<version>1.5.1</version>
+				<configuration>
+					<gruntBuildDirectory>${project.build.directory}/grunt</gruntBuildDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>npm</goal>
+							<goal>grunt</goal>
+						</goals>
+					</execution>
+
+					<!-- run grunt task "compile" in maven's "compile" phase -->
+					<execution>
+						<id>grunt-compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>grunt</goal>
+						</goals>
+						<configuration>
+							<target>default</target>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<!--Syncing package.json project name with with pom.xml-->
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.2</version>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+						<configuration>
+							<file>${project.basedir}/package.json</file>
+							<replacements>
+								<replacement>
+									<token>"name"(\s*):(\s*)"(.*)"</token>
+									<value>"name": "${project.name}"</value>
+								</replacement>
+								<replacement>
+									<token>"version": "(.*)"</token>
+									<value>"version": "${project.version}"</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
-
 </project>
