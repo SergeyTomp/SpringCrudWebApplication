@@ -22,9 +22,15 @@ public class DbConfig {
     @Value("${spring.datasource.url}")
     private String dataSourceUrl;
 
+    @Value("${spring.datasource.username}")
+    private String login;
+
+    @Value("${spring.datasource.password}")
+    private String password;
+
     @Bean
     public DataSource dataSource() {
-        return JdbcConnectionPool.create(dataSourceUrl, "Sergey", "Gfhjkm789");
+        return JdbcConnectionPool.create(dataSourceUrl, login, password);
     }
 
 
