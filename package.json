@@ -3,11 +3,17 @@
   "version": "0.0.1",
   "devDependencies": {
     "grunt": "latest",
-    "grunt-typescript": "latest",
-    "grunt-contrib-uglify": "latest",
-    "grunt-contrib-less": "latest",
+    "grunt-contrib-clean": "latest",
     "grunt-contrib-cssmin": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-uglify": "latest",
     "grunt-contrib-watch": "latest",
-    "grunt-contrib-clean": "latest"
+    "grunt-typescript": "latest",
+    "grunt-webpack": "^4.0.2",
+    "webpack": "^5.9.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "scripts": {
+    "build": "webpack"
   }
 }

@@ -3,7 +3,7 @@
     "target": "es6",
     "removeComments": true,
     "outDir": "js",
-    "sourceMap": true
-//    "outFile": "scripts.js"
+    "sourceMap": true,
+    "outFile": "scripts.js"
   }
 }

@@ -1,3 +1,6 @@
+const webpackConfig = require('./webpack.config.js');
+const NODE_ENV = process.env.NODE_ENV;
+
 module.exports = function(grunt) {
     grunt.initConfig({
         // ----- Environment
@@ -54,6 +57,13 @@ module.exports = function(grunt) {
                 src:['<%= dir.source_ts %>/*.d.ts','<%= dir.source_ts %>/*.js' ]
             }
         },
+        webpack: {
+            options: {
+                stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development',
+            },
+            prod: webpackConfig,
+            build: Object.assign({ watch: false }, webpackConfig)
+        },
         uglify: {
             my_target: {
                 dest: '<%= dir.target_js %>/minified.js',
@@ -77,8 +87,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-typescript');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-webpack');
     // grunt.loadNpmTasks('grunt-contrib-jasmine');
     // grunt.registerTask('default', ['typescript:compile','typescript:compile_test','jasmine']);
-    grunt.registerTask('default', ['clean:clean_all', 'typescript:compile' ]);
+    grunt.registerTask('default', ['clean:clean_all', 'typescript:compile', "webpack:prod" ]);
     // grunt.registerTask('compile', ['clean:clean_all', 'typescript:compile' ]);
 };
