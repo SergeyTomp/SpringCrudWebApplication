@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         // define some directories to be used during build
         dir: {
             // location where TypeScript source files are located
-            "source_ts": "src/main/resources/static/js",
+            "source_ts": "./static/js",
 
             // location where TypeScript/Jasmine test files are located
             // "source_test_ts": "src/test/ts",
@@ -18,7 +18,7 @@ module.exports = function(grunt) {
             "target": "target",
 
             // location to place (compiled) javascript files
-            "target_js": "target/js",
+            "target_js": "target/webapp/static/js",
 
             // location to place (compiles) javascript test files
             // "target_test_js": "target/js-test",

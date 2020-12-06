@@ -56,28 +56,28 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-<!--			<plugin>-->
-<!--				<artifactId>maven-resources-plugin</artifactId>-->
-<!--				<version>2.6</version>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>copy-resources</id>-->
-<!--						<phase>validate</phase>-->
-<!--						<goals>-->
-<!--							<goal>copy-resources</goal>-->
-<!--						</goals>-->
-<!--						<configuration>-->
-<!--							<outputDirectory>${basedir}/target/classes/static</outputDirectory>-->
-<!--							<resources>-->
-<!--								<resource>-->
-<!--									<directory>src/main/webapp</directory>-->
-<!--									<filtering>true</filtering>-->
-<!--								</resource>-->
-<!--							</resources>-->
-<!--						</configuration>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes/static</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/webapp/static</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
 			<!--invoke Grunt from within Maven-->
 			<plugin>
@@ -85,7 +85,10 @@
 				<artifactId>grunt-maven-plugin</artifactId>
 				<version>1.5.1</version>
 				<configuration>
-					<gruntBuildDirectory>${project.build.directory}/grunt</gruntBuildDirectory>
+<!--					<gruntBuildDirectory>${project.build.directory}/src/main/webapp</gruntBuildDirectory>-->
+					<gruntBuildDirectory>${project.basedir}/src/main/webapp</gruntBuildDirectory>
+					<gruntExecutable>node_modules/grunt-cli/bin/grunt</gruntExecutable>
+					<runGruntWithNode>true</runGruntWithNode>
 				</configuration>
 				<executions>
 					<execution>
@@ -97,16 +100,16 @@
 					</execution>
 
 					<!-- run grunt task "compile" in maven's "compile" phase -->
-					<execution>
-						<id>grunt-compile</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>grunt</goal>
-						</goals>
-						<configuration>
-							<target>default</target>
-						</configuration>
-					</execution>
+<!--					<execution>-->
+<!--						<id>grunt-compile</id>-->
+<!--						<phase>compile</phase>-->
+<!--						<goals>-->
+<!--							<goal>grunt</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<target>default</target>-->
+<!--						</configuration>-->
+<!--					</execution>-->
 
 				</executions>
 			</plugin>
@@ -123,7 +126,7 @@
 							<goal>replace</goal>
 						</goals>
 						<configuration>
-							<file>${project.basedir}/package.json</file>
+							<file>${project.basedir}/src/main/webapp/package.json</file>
 							<replacements>
 								<replacement>
 									<token>"name"(\s*):(\s*)"(.*)"</token>
