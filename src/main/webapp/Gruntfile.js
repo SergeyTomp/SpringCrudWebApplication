@@ -1,5 +1,4 @@
 const webpackConfig = require('./webpack.config.js');
-const NODE_ENV = process.env.NODE_ENV;
 
 module.exports = function(grunt) {
     grunt.initConfig({
@@ -18,7 +17,8 @@ module.exports = function(grunt) {
             "target": "target",
 
             // location to place (compiled) javascript files
-            "target_js": "target/webapp/static/js",
+            // "target_js": "target/webapp/static/js",
+            "target_js": "./static/js",
 
             // location to place (compiles) javascript test files
             // "target_test_js": "target/js-test",
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
             // Compiles the code into a single file. Also generates a typescript declaration file
             compile: {
                 src: ['<%= dir.source_ts %>/**/*.ts'],
-                dest: '<%= dir.source_ts %>',
+                dest: '<%= dir.target_js %>',
                 // dest: '<%= dir.target_js %>/<%= project.name %>.js',
                 options: {
                     base_path: '<%= dir.source_ts %>',

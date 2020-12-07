@@ -1,7 +1,9 @@
 const path = require('path');
-let out_path = process.env.NODE_ENV === 'development' ? './static/dev' : './static/prod';
+let mode = process.env.NODE_ENV ? process.env.NODE_ENV : 'production';
+let out_path = mode === 'development' ? './static/dev' : './static/prod';
+
 module.exports = {
-    mode: 'development',
+    mode: mode,
     entry: './static/js/scripts.js',
     output: {
         path: path.resolve(__dirname, out_path),
